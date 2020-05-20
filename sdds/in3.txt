@@ -1,0 +1,8 @@
+3SN n 1
+:6S
+me N AT94ST87HA4DA932C
+dummy KQ5SA9HT87DJ8654C
+end
+west 8-10 hcp
+done
+100
