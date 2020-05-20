@@ -9,9 +9,13 @@ This improves on a standard double dummy solver to evaluate declarer and defensi
 information about deal state:
 
 (example:)
+
 3NS n 2
+
 :2STS4S6S :
+
 me S AJ6ST7HAKQJ63DK3C
+
 dummy TSAQ952H9DQ97542C
 
 The first line contains the contract, a character that is either v (for vulnerable) or n (non-vulnerable), and the number of tricks played (including the trick for the play being simulated), k.
@@ -20,7 +24,9 @@ The third and fourth lines specify the initial cards held by the person to play 
 
 known constraints on other hands:
 (example:)
+
 west: 5+ spades, 10+ hcp, 10+ pts
+
 east: 3+ spades
 
 This can have up to 4 lines, possibly indicating constraints for each position. The variables that you can constrain are number of cards of each suit (spades, hearts, clubs, diamonds), HCPs (hcp), and total points (pts). The colon and comma in the above specification are optional. 6-10, >=6, 6+, 10-, <=10, 8 are all valid syntax.
