@@ -1,0 +1,34 @@
+<html>
+    <head>
+      <title>Stochastic Double Dummy Solver</title>
+      <script type="text/javascript" src="socket.io.js"></script>
+      <script type="text/javascript" src="bridge_handler.js"></script>
+    </head>
+    <body>
+      <h3>Stochastic Double Dummy Solver</h3>
+      <p> This improves on a standard double dummy solver to evaluate declarer and defensive plays. The goal is to be able to determine what the optimal play for a situation was a priori, including constraints from the bidding but not unknown information about other players' hands. To evaluate plays, it generates N (N <= 200) random boards with the given deals for the current player and dummy which satisfy the constraints provided, runs a double-dummy solver on each, and averages the results. Although it's still a crude approximation, we can use this to estimate the expected number of IMPs gained or lost by playing a specific card against a partnership with the same deal, contract, and earlier plays who made a different choice, assuming both sides play optimally afterwards. </p>
+     <p> (This doesn't work yet for modelling the initial lead, since my implementation currently only generates deals filling in two unknown hands. I might add this later if I have time.)</p>
+     <p> The input specification, technical details, and source code are here: <a href="https://github.com/VietaFan/bridge-sdds">https://github.com/VietaFan/bridge-sdds</a>. The underlying double dummy simulations are run on a Raspberry Pi using Bo Haglund and Soren Hein's optimized C++ double dummy <a href="https://github.com/dds-bridge/dds">solver</a>. </p>
+      <p id="server_status"></p>
+     <p>Enter deal state and constraints below.</p>
+     <form action="javascript:void(0);" onsubmit="submitQuery()">
+        information about deal state:<br>
+        <textarea id="deal_state" name="deal_state" rows="8" cols="48">
+3NS n 2
+:2STS4S6S :
+me S AJ6ST7HAKQJ63DK3C
+dummy TSAQ952H9DQ97542C</textarea><br>
+        known constraints on other hands (this is for the initial hands, so point/card totals here are including cards that have already been played):<br>
+        <textarea id="constraints" name="constraints" rows="8" cols="48">west: 5+ spades, 10+ hcp
+east: 3+ spades</textarea><br>
+        number of boards to simulate (max 200):<br>
+        <input type="text" id="nboards" value="50"><br>
+
+        <input type="hidden" id="qid"><br>
+        <input type="submit">
+      </form>
+      <p id="status"></p>
+      <p id="queue_pos"></p>
+      <p id="result"></p>
+    </body>
+</html>
